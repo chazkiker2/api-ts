@@ -56,14 +56,14 @@ export class User {
       const ret = []
       const entry = ["", -1]
       for (let i = 0; i < split.length; i++) {
-        const x = split[i]
-        if (!x) {
+        const item = split[i]
+        if (!item) {
           continue
         }
         if (i % 2 === 0) {
-          entry[0] = split[i]
+          entry[0] = item
         } else {
-          entry[1] = +split[i]
+          entry[1] = +item
           ret.push([...entry])
         }
       }

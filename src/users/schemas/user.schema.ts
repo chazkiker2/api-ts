@@ -38,8 +38,8 @@ export class User {
   @Prop({ default: "" })
   logins: string
 
-  @Prop({ default: new Date() })
-  emtAnswered: Date
+  @Prop({ default: null })
+  emtAnswered?: Date
 
   @Prop({ default: "Placeholder-Image.png" })
   awsImageName: string

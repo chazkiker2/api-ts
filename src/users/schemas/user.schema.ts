@@ -1,9 +1,9 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose"
+import { Prop, raw, Schema, SchemaFactory } from "@nestjs/mongoose"
 import { Document } from "mongoose"
 
 export type UserDocument = User & Document
 
-@Schema()
+@Schema({ toJSON: { getters: true } })
 export class User {
   @Prop({ required: true })
   firstName: string
@@ -50,11 +50,35 @@ export class User {
   @Prop({ default: "unprivileged" })
   permission: string
 
-  @Prop({ default: "" })
-  progress: string
+  @Prop({
+    get: (progress: string) => {
+      const split = progress[0].split(" ")
+      const ret = []
+      const entry = ["", -1]
+      for (let i = 0; i < split.length; i++) {
+        const x = split[i]
+        if (!x) {
+          continue
+        }
+        if (i % 2 === 0) {
+          entry[0] = split[i]
+        } else {
+          entry[1] = +split[i]
+          ret.push([...entry])
+        }
+      }
+      return ret
+    },
+  })
+  progress: Array<[string, number]>
 
   @Prop({ default: "" })
   savedOpportunities: string
 }
 
 export const UserSchema = SchemaFactory.createForClass(User)
+UserSchema.virtual("progress_v2").get(function () {
+  console.log(this)
+  console.log(this.progress)
+  return ""
+})

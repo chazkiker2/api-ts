@@ -1,9 +1,11 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose"
 import { Document } from "mongoose"
+import * as mongoose from "mongoose"
+import { User } from "src/users/schemas/user.schema"
 
 export type PostDocument = Post & Document
 
-@Schema()
+@Schema({ toJSON: { getters: true } })
 export class Post {
   @Prop({ required: true })
   userId: string
@@ -20,8 +22,13 @@ export class Post {
   @Prop({ required: true })
   comment: string
 
-  @Prop({ default: "" })
-  usersLiked: string
+  @Prop({
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    get: (usersLiked: string) => {
+      return usersLiked[0].split(" ").filter((x) => x)
+    },
+  })
+  usersLiked: User[]
 
   @Prop({ required: true })
   date: Date

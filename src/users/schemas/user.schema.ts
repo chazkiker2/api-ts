@@ -1,0 +1,60 @@
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose"
+import { Document } from "mongoose"
+
+export type UserDocument = User & Document
+
+@Schema()
+export class User {
+  @Prop({ required: true })
+  firstName: string
+
+  @Prop({ required: true })
+  lastName: string
+
+  @Prop({ required: true })
+  email: string
+
+  @Prop({ required: true })
+  password: string
+
+  @Prop({ default: "" })
+  bio: string
+
+  @Prop({ default: "" })
+  prompts: string
+
+  @Prop({ default: "" })
+  linkedIn: string
+
+  @Prop({ default: "" })
+  website: string
+
+  @Prop({ default: "none" })
+  group: string
+
+  @Prop({ default: 0 })
+  points: number
+
+  @Prop({ default: "" })
+  logins: string
+
+  @Prop({ default: new Date() })
+  emtAnswered: Date
+
+  @Prop({ default: "Placeholder-Image.png" })
+  awsImageName: string
+
+  @Prop({ default: "" })
+  resetUrl: string
+
+  @Prop({ default: "unprivileged" })
+  permission: string
+
+  @Prop({ default: "" })
+  progress: string
+
+  @Prop({ default: "" })
+  savedOpportunities: string
+}
+
+export const UserSchema = SchemaFactory.createForClass(User)

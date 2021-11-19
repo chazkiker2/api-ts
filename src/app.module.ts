@@ -6,6 +6,7 @@ import { AppService } from "./app.service"
 import { UsersModule } from "./users/users.module"
 import { ApprovedUsersModule } from "./approved-users/approved-users.module"
 import { EmtAnswersModule } from "./emt-answers/emt-answers.module"
+import { PromptsModule } from "./prompts/prompts.module"
 
 @Module({
   //   imports: [MongooseModule.forRoot("mongodb://localhost/test"), UsersModule],
@@ -15,6 +16,7 @@ import { EmtAnswersModule } from "./emt-answers/emt-answers.module"
     UsersModule,
     ApprovedUsersModule,
     EmtAnswersModule,
+    PromptsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

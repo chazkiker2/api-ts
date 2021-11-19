@@ -4,6 +4,7 @@ import { ConfigModule } from "@nestjs/config"
 import { AppController } from "./app.controller"
 import { AppService } from "./app.service"
 import { UsersModule } from "./users/users.module"
+import { ApprovedUsersModule } from "./approved-users/approved-users.module"
 
 @Module({
   //   imports: [MongooseModule.forRoot("mongodb://localhost/test"), UsersModule],
@@ -11,6 +12,7 @@ import { UsersModule } from "./users/users.module"
     ConfigModule.forRoot(),
     MongooseModule.forRoot(process.env.DATABASE_URL),
     UsersModule,
+    ApprovedUsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
